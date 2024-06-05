@@ -1,23 +1,21 @@
 1. #include <stdio.h>
 
-// Function to find the maximum area of water a container can store
+
 int maxArea(int* height, int heightSize) {
-    int left = 0;                  // Initialize left pointer at the beginning
-    int right = heightSize - 1;    // Initialize right pointer at the end
-    int max_area = 0;              // Variable to store the maximum area found
+    int left = 0;                 
+    int right = heightSize - 1;    
+    int max_area = 0;              
 
     while (left < right) {
-        // Calculate the area between the lines at the left and right pointers
+        
         int width = right - left;
         int current_height = (height[left] < height[right]) ? height[left] : height[right];
         int current_area = width * current_height;
 
-        // Update the maximum area if the current area is larger
+        
         if (current_area > max_area) {
             max_area = current_area;
         }
-
-        // Move the pointer pointing to the shorter line inward
         if (height[left] < height[right]) {
             left++;
         } else {
@@ -28,9 +26,9 @@ int maxArea(int* height, int heightSize) {
     return max_area;
 }
 
-// Main function to test the maxArea function
+
 int main() {
-    int height[] = {1, 8, 6, 2, 5, 4, 8, 3, 7};  // Example input
+    int height[] = {1, 8, 6, 2, 5, 4, 8, 3, 7}; 
     int heightSize = sizeof(height) / sizeof(height[0]);
 
     int result = maxArea(height, heightSize);
@@ -73,7 +71,7 @@ int main() {
 3. #include <stdio.h>
 #include <string.h>
 
-// Function to get the value of a Roman numeral character
+
 int value(char r) {
     switch(r) {
         case 'I': return 1;
@@ -86,8 +84,6 @@ int value(char r) {
         default: return 0;
     }
 }
-
-// Function to convert a Roman numeral to an integer
 int romanToInt(char *s) {
     int total = 0;
     int prev_value = 0;
@@ -109,15 +105,10 @@ int romanToInt(char *s) {
 }
 
 int main() {
-    // Example 1
     char s1[] = "III";
     printf("The integer value of %s is: %d\n", s1, romanToInt(s1));
-
-    // Example 2
     char s2[] = "LVIII";
     printf("The integer value of %s is: %d\n", s2, romanToInt(s2));
-
-    // Example 3
     char s3[] = "MCMXCIV";
     printf("The integer value of %s is: %d\n", s3, romanToInt(s3));
 
@@ -125,8 +116,6 @@ int main() {
 }
 4. #include <stdio.h>
 #include <string.h>
-
-// Function to find the minimum length string in the array
 int findMinLength(char** strs, int strsSize) {
     int minLength = strlen(strs[0]);
     for (int i = 1; i < strsSize; i++) {
@@ -137,13 +126,10 @@ int findMinLength(char** strs, int strsSize) {
     }
     return minLength;
 }
-
-// Function to find the longest common prefix
 char* longestCommonPrefix(char** strs, int strsSize) {
     if (strsSize == 0) {
         return "";
     }
-    
     int minLength = findMinLength(strs, strsSize);
     static char prefix[201];
     int prefixLength = 0;
@@ -164,12 +150,9 @@ char* longestCommonPrefix(char** strs, int strsSize) {
 }
 
 int main() {
-    // Example 1
     char* strs1[] = {"flower", "flow", "flight"};
     int strsSize1 = sizeof(strs1) / sizeof(strs1[0]);
     printf("Longest common prefix: %s\n", longestCommonPrefix(strs1, strsSize1));
-
-    // Example 2
     char* strs2[] = {"dog", "racecar", "car"};
     int strsSize2 = sizeof(strs2) / sizeof(strs2[0]);
     printf("Longest common prefix: %s\n", longestCommonPrefix(strs2, strsSize2));
@@ -178,19 +161,12 @@ int main() {
 }
 5. #include <stdio.h>
 #include <stdlib.h>
-
-// Function to compare two integers (for qsort)
 int compare(const void *a, const void *b) {
     return (*(int *)a - *(int *)b);
 }
-
-// Function to find all unique triplets in the array that sum up to zero
 void threeSum(int* nums, int numsSize) {
-    // Sort the array
     qsort(nums, numsSize, sizeof(int), compare);
-
-    for (int i = 0; i < numsSize - 2; i++) {
-        // Avoid duplicates for the first number
+for (int i = 0; i < numsSize - 2; i++) {
         if (i > 0 && nums[i] == nums[i - 1]) {
             continue;
         }
@@ -203,8 +179,6 @@ void threeSum(int* nums, int numsSize) {
 
             if (sum == 0) {
                 printf("[%d, %d, %d]\n", nums[i], nums[left], nums[right]);
-
-                // Avoid duplicates for the second and third numbers
                 while (left < right && nums[left] == nums[left + 1]) {
                     left++;
                 }
@@ -224,11 +198,8 @@ void threeSum(int* nums, int numsSize) {
 }
 
 int main() {
-    // Example input
     int nums[] = {-1, 0, 1, 2, -1, -4};
     int numsSize = sizeof(nums) / sizeof(nums[0]);
-
-    // Find and print the triplets
     printf("Unique triplets that sum up to zero:\n");
     threeSum(nums, numsSize);
 
@@ -289,8 +260,6 @@ int main() {
 #include <string.h>
 
 const char* phoneMap[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-
-// Function to find all combinations recursively
 void backtrack(char** result, int* returnSize, char* combination, int index, const char* digits) {
     if (digits[index] == '\0') {
         result[*returnSize] = strdup(combination);
@@ -304,8 +273,6 @@ void backtrack(char** result, int* returnSize, char* combination, int index, con
         backtrack(result, returnSize, combination, index + 1, digits);
     }
 }
-
-// Main function to find letter combinations of a phone number
 char** letterCombinations(char* digits, int* returnSize) {
     *returnSize = 0;
     if (digits[0] == '\0') {
@@ -491,32 +458,22 @@ int main() {
 10. #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-// Structure to represent a stack
 struct Stack {
     char* array;
     int top;
 };
-
-// Function to initialize the stack
 struct Stack* createStack(int size) {
     struct Stack* stack = (struct Stack*)malloc(sizeof(struct Stack));
     stack->array = (char*)malloc(size * sizeof(char));
     stack->top = -1;
     return stack;
 }
-
-// Function to push an element onto the stack
 void push(struct Stack* stack, char value) {
     stack->array[++stack->top] = value;
 }
-
-// Function to pop an element from the stack
 char pop(struct Stack* stack) {
     return stack->array[stack->top--];
 }
-
-// Function to check if the string of parentheses is valid
 bool isValid(char* s) {
     struct Stack* stack = createStack(strlen(s));
     int i = 0;
@@ -542,15 +499,10 @@ bool isValid(char* s) {
 }
 
 int main() {
-    // Example 1
     char s1[] = "()";
     printf("Example 1: %s\n", isValid(s1) ? "true" : "false");
-
-    // Example 2
     char s2[] = "()[]{}";
     printf("Example 2: %s\n", isValid(s2) ? "true" : "false");
-
-    // Example 3
     char s3[] = "(]";
     printf("Example 3: %s\n", isValid(s3) ? "true" : "false");
 
